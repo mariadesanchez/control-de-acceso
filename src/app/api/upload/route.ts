@@ -1,31 +1,31 @@
 import { NextRequest, NextResponse } from "next/server";
 import cloudinary from "@/lib/cloudinary";
 
-export async function POST(req: NextRequest) {
+export const POST = async (req: NextRequest) => {
   try {
-    const data = await req.formData();
-    const file = data.get("file");
+    const formData = await req.formData();
+    const file = formData.get("file") as File;
 
-    if (!file || typeof file === "string") {
-      return NextResponse.json({ error: "No se envió ningún archivo" }, { status: 400 });
+    if (!file) {
+      return NextResponse.json({ error: "No file uploaded" }, { status: 400 });
     }
 
-    const buffer = Buffer.from(await file.arrayBuffer());
+    // Convertir File a base64 (Cloudinary acepta Data URI)
+    const arrayBuffer = await file.arrayBuffer();
+    const base64 = Buffer.from(arrayBuffer).toString("base64");
+    const dataUri = `data:${file.type};base64,${base64}`;
 
-    return new Promise<NextResponse>((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
-        { resource_type: "image" },
-        (err, result) => {
-          if (err) return reject(NextResponse.json({ error: err.message }, { status: 500 }));
-          resolve(NextResponse.json({ url: result?.secure_url }));
-        }
-      );
-      stream.end(buffer);
-    });
+    const result = await cloudinary.uploader.upload(dataUri);
+
+    // Devuelve JSON con secure_url
+    return NextResponse.json({ secure_url: result.secure_url });
   } catch (err) {
-    return NextResponse.json({ error: err instanceof Error ? err.message : "Error" }, { status: 500 });
+    console.error("Error en /api/upload:", err);
+    return NextResponse.json({ error: "Error uploading file" }, { status: 500 });
   }
-}
+};
+
+
 
 
 
