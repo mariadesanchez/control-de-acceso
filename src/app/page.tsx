@@ -105,7 +105,7 @@ export default function Home() {
           flexDirection: "column",
           alignItems: "center",
           gap: "16px",
-          marginTop: "80px", // espacio para que el logo no tape el video
+          marginTop: "50px", // espacio para que el logo no tape el video
         }}
       >
         {/* Video pequeño */}
@@ -114,8 +114,8 @@ export default function Home() {
           autoPlay
           playsInline
           style={{
-            width: "240px",
-            height: "320px",
+            width: "280px",
+            height: "360px",
             borderRadius: "16px",
             boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
             objectFit: "cover",
@@ -128,7 +128,7 @@ export default function Home() {
           onClick={handleCapture}
           disabled={uploading}
           style={{
-            marginTop: "8px",
+            marginTop: "4px",
             width: "60px",
             height: "60px",
             backgroundColor: "#4CAF50", // verde institucional
