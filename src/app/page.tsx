@@ -144,34 +144,45 @@ export default function Home() {
           {uploading ? "..." : " "}
         </button>
 
-        {/* Mensaje de éxito */}
+        {/* Mensaje de éxito con URL */}
         {success && uploadedUrl && (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              marginTop: "12px",
-              color: "#22c55e", // verde brillante
-              fontSize: "20px",
-              fontWeight: "bold",
-              textAlign: "center",
-            }}
-          >
-            {/* Ícono de check */}
+          <div style={{ marginTop: "16px", textAlign: "center" }}>
+            {/* ✅ y texto en la misma línea */}
             <div
               style={{
-                fontSize: "48px",
-                marginBottom: "8px",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                gap: "8px",
+                color: "#22c55e",
+                fontSize: "22px",
+                fontWeight: "bold",
               }}
             >
-              ✅
+              ✅ ¡Guardado Exitoso!
             </div>
-            Guardado Exitoso
+
+            {/* URL */}
+            <a
+              href={uploadedUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                display: "block",
+                marginTop: "6px",
+                color: "#2563EB", // azul
+                textDecoration: "underline",
+                fontSize: "14px",
+                wordBreak: "break-all",
+              }}
+            >
+              {uploadedUrl}
+            </a>
           </div>
         )}
       </div>
     </main>
   );
 }
+
 
