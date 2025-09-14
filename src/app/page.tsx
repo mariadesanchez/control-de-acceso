@@ -79,7 +79,7 @@ export default function Home() {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "100vh",
-        backgroundColor: "#f3f3f3",
+        backgroundColor: "#1F2937", // gris oscuro elegante
         padding: "16px",
         position: "relative",
       }}
@@ -105,6 +105,7 @@ export default function Home() {
           flexDirection: "column",
           alignItems: "center",
           gap: "16px",
+          marginTop: "80px", // espacio para que el logo no tape el video
         }}
       >
         {/* Video pequeño */}
@@ -116,9 +117,9 @@ export default function Home() {
             width: "240px",
             height: "320px",
             borderRadius: "16px",
-            boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+            boxShadow: "0 4px 15px rgba(0,0,0,0.5)",
             objectFit: "cover",
-            border: "2px solid #34D399", // verde
+            border: "2px solid #4CAF50", // borde verde del mismo color que el botón
           }}
         />
 
@@ -130,12 +131,12 @@ export default function Home() {
             marginTop: "8px",
             width: "60px",
             height: "60px",
-            backgroundColor: "#10B981", // verde
+            backgroundColor: "#4CAF50", // verde de la captura
             color: "white",
             fontWeight: "bold",
             padding: "10px 0",
             borderRadius: "100px",
-            boxShadow: "0 6px 20px rgba(0,0,0,0.3)",
+            boxShadow: "0 6px 20px rgba(0,0,0,0.5)",
             fontSize: "16px",
             cursor: uploading ? "not-allowed" : "pointer",
             transition: "all 0.2s",
@@ -151,7 +152,7 @@ export default function Home() {
             target="_blank"
             rel="noopener noreferrer"
             style={{
-              color: "#3B82F6", // azul
+              color: "#93C5FD", // azul clarito para contraste en fondo oscuro
               textDecoration: "underline",
               wordBreak: "break-all",
               marginTop: "8px",
@@ -166,3 +167,4 @@ export default function Home() {
     </main>
   );
 }
+
