@@ -113,7 +113,6 @@
 //     </main>
 //   );
 // }
-
 "use client";
 
 import { useEffect, useRef, useState } from "react";
@@ -129,7 +128,7 @@ export default function Home() {
     const openCamera = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "user" }, // cámara frontal
+          video: { facingMode: "user" }, // frontal
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -146,9 +145,10 @@ export default function Home() {
     if (!videoRef.current) return;
 
     const video = videoRef.current;
+    const scale = 0.3; // reducir tamaño de la foto al 30%
     const canvas = document.createElement("canvas");
-    canvas.width = video.videoWidth;
-    canvas.height = video.videoHeight;
+    canvas.width = video.videoWidth * scale;
+    canvas.height = video.videoHeight * scale;
 
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
@@ -187,21 +187,20 @@ export default function Home() {
 
   return (
     <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      {/* Contenedor del video y botón */}
-      <div className="flex flex-col items-center w-full max-w-sm gap-4">
-        {/* Video en vivo */}
+      <div className="flex flex-col items-center gap-4">
+        {/* Video frontal en pantalla pequeña */}
         <video
           ref={videoRef}
           autoPlay
           playsInline
-          className="w-full rounded-xl shadow-lg"
+          className="w-40 h-60 rounded-xl shadow-lg object-cover"
         />
 
         {/* Botón Foto */}
         <button
           onClick={handleCapture}
           disabled={uploading}
-          className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-2xl transition transform hover:scale-105 active:scale-95 disabled:opacity-50 text-lg mt-4"
+          className="w-40 bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-3 rounded-2xl shadow-2xl transition transform hover:scale-105 active:scale-95 disabled:opacity-50 text-lg mt-4"
         >
           {uploading ? "Subiendo..." : "Foto"}
         </button>
@@ -221,6 +220,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 
 
