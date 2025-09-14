@@ -120,17 +120,16 @@ import { useEffect, useRef, useState } from "react";
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
-
   const [uploading, setUploading] = useState(false);
   const [uploadedUrl, setUploadedUrl] = useState<string | null>(null);
   const [success, setSuccess] = useState(false);
 
-  // Abrir la cámara automáticamente
+  // Abrir cámara frontal automáticamente
   useEffect(() => {
     const openCamera = async () => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({
-          video: { facingMode: "environment" },
+          video: { facingMode: "user" }, // cámara frontal
         });
         if (videoRef.current) {
           videoRef.current.srcObject = stream;
@@ -142,6 +141,7 @@ export default function Home() {
     openCamera();
   }, []);
 
+  // Capturar foto y enviar a Cloudinary
   const handleCapture = async () => {
     if (!videoRef.current) return;
 
@@ -186,9 +186,9 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-between min-h-screen bg-gray-100 p-4">
+    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
       {/* Contenedor del video y botón */}
-      <div className="flex flex-col items-center w-full max-w-xs mt-6">
+      <div className="flex flex-col items-center w-full max-w-sm gap-4">
         {/* Video en vivo */}
         <video
           ref={videoRef}
@@ -196,17 +196,15 @@ export default function Home() {
           playsInline
           className="w-full rounded-xl shadow-lg"
         />
- <p>Presiona Enviar...</p>
-<button
-  onClick={handleCapture}
-  disabled={uploading}
-  className="mt-6 w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-2xl transition transform hover:scale-105 active:scale-95 disabled:opacity-50 text-lg"
->
-  {uploading ? "Subiendo..." : "Enviar"}
- 
-</button>
 
-
+        {/* Botón Foto */}
+        <button
+          onClick={handleCapture}
+          disabled={uploading}
+          className="w-full bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-4 rounded-2xl shadow-2xl transition transform hover:scale-105 active:scale-95 disabled:opacity-50 text-lg mt-4"
+        >
+          {uploading ? "Subiendo..." : "Foto"}
+        </button>
 
         {/* URL de Cloudinary */}
         {success && uploadedUrl && (
@@ -214,7 +212,7 @@ export default function Home() {
             href={uploadedUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:underline break-all text-sm mt-3 text-center"
+            className="text-blue-600 hover:underline break-all text-sm mt-2 text-center"
           >
             {uploadedUrl}
           </a>
@@ -223,6 +221,7 @@ export default function Home() {
     </main>
   );
 }
+
 
 
 
