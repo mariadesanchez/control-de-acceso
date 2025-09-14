@@ -93,7 +93,7 @@ export default function Home() {
           top: "16px",
           left: "50%",
           transform: "translateX(-50%)",
-          width: "100px",
+          width: "180px",
           height: "auto",
           zIndex: 999,
         }}
