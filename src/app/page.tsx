@@ -140,7 +140,6 @@ export default function Home() {
     openCamera();
   }, []);
 
-  // Capturar foto y enviar a Cloudinary
   const handleCapture = async () => {
     if (!videoRef.current) return;
 
@@ -186,21 +185,57 @@ export default function Home() {
   };
 
   return (
-    <main className="flex flex-col items-center justify-center min-h-screen bg-gray-100 p-4">
-      <div className="flex flex-col items-center gap-4">
-        {/* Video frontal en pantalla pequeña */}
+    <main
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        minHeight: "100vh",
+        backgroundColor: "#f3f3f3",
+        padding: "16px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          gap: "16px",
+        }}
+      >
+        {/* Video pequeño */}
         <video
           ref={videoRef}
           autoPlay
           playsInline
-          className="w-40 h-60 rounded-xl shadow-lg object-cover"
+          style={{
+            width: "120px",
+            height: "160px",
+            borderRadius: "16px",
+            boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+            objectFit: "cover",
+            border: "2px solid #34D399", // verde
+          }}
         />
 
         {/* Botón Foto */}
         <button
           onClick={handleCapture}
           disabled={uploading}
-          className="w-40 bg-green-500 hover:bg-green-600 active:bg-green-700 text-white font-bold py-3 rounded-2xl shadow-2xl transition transform hover:scale-105 active:scale-95 disabled:opacity-50 text-lg mt-4"
+          style={{
+            marginTop: "12px",
+            width: "120px",
+            backgroundColor: "#10B981", // verde
+            color: "white",
+            fontWeight: "bold",
+            padding: "10px 0",
+            borderRadius: "16px",
+            boxShadow: "0 6px 20px rgba(0,0,0,0.3)",
+            fontSize: "16px",
+            cursor: uploading ? "not-allowed" : "pointer",
+            transition: "all 0.2s",
+          }}
         >
           {uploading ? "Subiendo..." : "Foto"}
         </button>
@@ -211,7 +246,14 @@ export default function Home() {
             href={uploadedUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-blue-600 hover:underline break-all text-sm mt-2 text-center"
+            style={{
+              color: "#3B82F6", // azul
+              textDecoration: "underline",
+              wordBreak: "break-all",
+              marginTop: "8px",
+              fontSize: "12px",
+              textAlign: "center",
+            }}
           >
             {uploadedUrl}
           </a>
@@ -220,6 +262,9 @@ export default function Home() {
     </main>
   );
 }
+
+
+
 
 
 
