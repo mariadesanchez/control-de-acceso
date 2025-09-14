@@ -79,12 +79,12 @@ export default function Home() {
         alignItems: "center",
         justifyContent: "center",
         minHeight: "100vh",
-        backgroundColor: "#F3F4F6", // gris claro que combina con la web
+        backgroundColor: "#F3F4F6", // gris claro
         padding: "16px",
         position: "relative",
       }}
     >
-      {/* Logo encima de todo */}
+      {/* Logo */}
       <img
         src="/logoCelulosaLaPlata.png"
         alt="Logo Celulosa La Plata"
@@ -105,10 +105,10 @@ export default function Home() {
           flexDirection: "column",
           alignItems: "center",
           gap: "16px",
-          marginTop: "50px", // espacio para que el logo no tape el video
+          marginTop: "50px",
         }}
       >
-        {/* Video pequeño */}
+        {/* Video */}
         <video
           ref={videoRef}
           autoPlay
@@ -119,7 +119,7 @@ export default function Home() {
             borderRadius: "16px",
             boxShadow: "0 4px 15px rgba(0,0,0,0.2)",
             objectFit: "cover",
-            border: "2px solid #4CAF50", // borde verde
+            border: "2px solid #4CAF50",
           }}
         />
 
@@ -131,10 +131,9 @@ export default function Home() {
             marginTop: "4px",
             width: "60px",
             height: "60px",
-            backgroundColor: "#4CAF50", // verde institucional
+            backgroundColor: "#4CAF50",
             color: "white",
             fontWeight: "bold",
-            padding: "10px 0",
             borderRadius: "100px",
             boxShadow: "0 6px 20px rgba(0,0,0,0.2)",
             fontSize: "16px",
@@ -142,28 +141,37 @@ export default function Home() {
             transition: "all 0.2s",
           }}
         >
-          {uploading ? "Subiendo..." : " "}
+          {uploading ? "..." : " "}
         </button>
 
-        {/* URL de Cloudinary */}
+        {/* Mensaje de éxito */}
         {success && uploadedUrl && (
-          <a
-            href={uploadedUrl}
-            target="_blank"
-            rel="noopener noreferrer"
+          <div
             style={{
-              color: "#2563EB", // azul para contraste
-              textDecoration: "underline",
-              wordBreak: "break-all",
-              marginTop: "8px",
-              fontSize: "12px",
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              marginTop: "12px",
+              color: "#22c55e", // verde brillante
+              fontSize: "20px",
+              fontWeight: "bold",
               textAlign: "center",
             }}
           >
-            {uploadedUrl}
-          </a>
+            {/* Ícono de check */}
+            <div
+              style={{
+                fontSize: "48px",
+                marginBottom: "8px",
+              }}
+            >
+              ✅
+            </div>
+            Guardado Exitoso
+          </div>
         )}
       </div>
     </main>
   );
 }
+
