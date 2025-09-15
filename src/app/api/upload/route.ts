@@ -121,11 +121,18 @@ export async function POST(req: Request) {
       fecha_hora_ingreso: acceso.fecha_hora_ingreso?.toISOString?.() ?? null,
       fecha_hora_egreso: acceso.fecha_hora_egreso ? acceso.fecha_hora_egreso.toISOString() : null,
     };
+   return NextResponse.json({
+  success: true,
+  message: "Archivo subido y guardado en Supabase",
+  secure_url: uploadResult.secure_url, // 👈
+  acceso: accesoSerialized,
+});
 
+    
     return NextResponse.json({
       success: true,
       message: "Archivo subido y guardado en Supabase",
-      cloudinaryUrl: uploadResult.secure_url,
+      secure_url: uploadResult.secure_url,
       acceso: accesoSerialized,
     });
   } catch (err: unknown) {

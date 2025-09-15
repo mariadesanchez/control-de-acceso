@@ -55,7 +55,7 @@ export default function Home() {
           });
 
           const data = await res.json();
-
+console.log(data)
           if (data.secure_url) {
             setUploadedUrl(data.secure_url);
             setSuccess(true);
@@ -86,8 +86,10 @@ export default function Home() {
     >
       {/* Logo */}
       <img
-        src="/logoCelulosaLaPlata.png"
+        src="/LogoCelulosaLaPlata.png"
+      
         alt="Logo Celulosa La Plata"
+
         style={{
           position: "absolute",
           top: "16px",
