@@ -86,7 +86,7 @@ console.log(data)
     >
       {/* Logo */}
       <img
-        src="/LogoCelulosaLaPlata.png"
+        src="/logoCelulosaLaPlata.png"
       
         alt="Logo Celulosa La Plata"
 
